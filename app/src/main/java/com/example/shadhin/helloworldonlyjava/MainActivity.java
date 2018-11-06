@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,9 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,9 +62,15 @@ public class MainActivity extends AppCompatActivity {
     Button restApiBtn;
     Button restapiListViewBtn;
     Button restApiMyBtn;
+    Button pick_image;
+    ImageView profile_image;
     ImageButton calenderButton;
     AwesomeValidation awesomeValidation;
     DBManager dbManager;
+    private static final String IMAGE_DIRECTORY = "/image_store";
+    private int GALLERY = 1, CAMERA = 2;
+
+
     //for permission access data
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     private static int SPLASH_TIME_OUT = 2000;
@@ -104,7 +117,16 @@ public class MainActivity extends AppCompatActivity {
         quickLogin = findViewById(R.id.login_btn);
         restApiBtn = findViewById(R.id.restapi_btn);
         restapiListViewBtn = findViewById(R.id.restapi_list_view_btn);
+        pick_image = findViewById(R.id.pick_image_btn);
+        profile_image = findViewById(R.id.profile_image);
 
+        pick_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPictureDialog();
+            }
+        });
+        
         //validation using awesome AwesomeValidation
         //https://github.com/thyrlian/AwesomeValidation
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -305,6 +327,107 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void showPictureDialog() {
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera",
+                "Remove image"};
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
+                            case 2:
+                                remove_pro_pic();
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    private void remove_pro_pic() {
+        profile_image.setImageResource(R.drawable.user);
+    }
+
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                Uri contentURI = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    String path = saveImage(bitmap);
+                    Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    profile_image.setImageBitmap(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        } else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            profile_image.setImageBitmap(thumbnail);
+            saveImage(thumbnail);
+            Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String saveImage(Bitmap myBitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File wallpaperDirectory = new File(
+                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
+        // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs();
+        }
+
+        try {
+            File f = new File(wallpaperDirectory, Calendar.getInstance()
+                    .getTimeInMillis() + ".jpg");
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            MediaScannerConnection.scanFile(this,
+                    new String[]{f.getPath()},
+                    new String[]{"image/jpeg"}, null);
+            fo.close();
+            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
+
+            return f.getAbsolutePath();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return "";
+    }
+
 
     //for access permission
 
@@ -433,14 +556,12 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
 
         // for image
-       /* profile_image.setDrawingCacheEnabled(true);
+        profile_image.setDrawingCacheEnabled(true);
         profile_image.buildDrawingCache();
         Bitmap bitmap = profile_image.getDrawingCache();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();*/
-
-
+        byte[] data = baos.toByteArray();
 
         //dbManager.addToDbImage(data);
        /* String[] SelectionArgs = {email.getText().toString()};
@@ -454,7 +575,7 @@ public class MainActivity extends AppCompatActivity {
         //end image to db
 
 
-       // values.put(DBManager.COL_ProfilePic, data);
+        values.put(DBManager.COL_ProfilePic, data);
         values.put(DBManager.COL_USERNAME, nickName.getText().toString());
         values.put(DBManager.COL_PHONE, phoneNumber.getText().toString());
         values.put(DBManager.COL_BIRTHDAY, birthDay.getText().toString());
