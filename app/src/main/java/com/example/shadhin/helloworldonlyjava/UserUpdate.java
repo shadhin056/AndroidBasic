@@ -7,10 +7,12 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class UserUpdate extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class UserUpdate extends AppCompatActivity {
     RadioGroup txtGender1;
     RadioButton M;
     RadioButton F;
+    Spinner SpPresentCountry1;
     Button backBtn;
     DBManager dbManager;
     String sessionId1;
@@ -45,6 +48,18 @@ public class UserUpdate extends AppCompatActivity {
         sessionId5 = getIntent().getStringExtra("id2");
         sessionId6 = getIntent().getStringExtra("gender2");
         sessionId7 = getIntent().getStringExtra("country2");
+        SpPresentCountry1 = (Spinner) findViewById(R.id.SpPresentCountry1);
+        String compareValue = sessionId7;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.country, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SpPresentCountry1.setAdapter(adapter);
+        if (compareValue != null) {
+            int spinnerPosition = adapter.getPosition(compareValue);
+            SpPresentCountry1.setSelection(spinnerPosition);
+        }
+
+
+
         txtGender1 = findViewById(R.id.txtGender1);
         M = findViewById(R.id.M);
         F = findViewById(R.id.F);
@@ -70,6 +85,7 @@ public class UserUpdate extends AppCompatActivity {
         upPhone.setText(sessionId2);
         upBDate.setText(sessionId3);
         upEmail.setText(sessionId4);
+
         txtGender1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -101,6 +117,7 @@ public class UserUpdate extends AppCompatActivity {
                 values.put(DBManager.COL_EMAIL, upEmail.getText().toString());
                 values.put(DBManager.COL_ID, sessionId5);
                 values.put(DBManager.COL_GENDER, selectedGenderType);
+                values.put(DBManager.COL_COUNTRY,  SpPresentCountry1.getSelectedItem().toString());
                 String[] SelectionArgs = {sessionId5};
                 int id = dbManager.update(values, "ID=?", SelectionArgs);
                 if (id > 0) {
