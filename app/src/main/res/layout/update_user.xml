@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Update form"
+            android:textColor="?android:attr/colorFocusedHighlight"
+            android:textStyle="bold"/>
+
+    <EditText
+            android:id="@+id/up_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_name"
+            android:inputType="text"/>
+
+    <EditText
+            android:id="@+id/up_phone_numer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_phone"
+            android:inputType="number"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/up_birthday"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_birth_date"
+                android:inputType="text"
+                android:paddingRight="40dp"
+                android:singleLine="true"/>
+
+        <ImageButton
+                android:id="@+id/calender_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/up_birthday"
+                android:layout_alignRight="@+id/up_birthday"
+                android:layout_alignTop="@+id/up_birthday"
+                android:background="@drawable/calender"/>
+
+    </RelativeLayout>
+
+
+    <EditText
+            android:id="@+id/up_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enter_email"
+            android:inputType="textWebEmailAddress"/>
+    />
+
+    <EditText
+            android:id="@+id/up_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enter_password"
+            android:inputType="textWebPassword"/>
+    />
+
+    <EditText
+            android:id="@+id/up_reenter_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enter_password_again"
+            android:inputType="textWebPassword"/>
+    />
+
+    <TextView
+            android:id="@+id/birthday_date_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+        <Button
+                android:id="@+id/update_user_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="Update"
+                android:textColor="@android:color/holo_orange_light"/>
+
+        <Button
+                android:id="@+id/back_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="Back To Users"
+                android:textColor="@android:color/holo_red_dark"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
