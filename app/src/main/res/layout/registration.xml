@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight=".1"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--<android.support.v4.view.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true" />
+
+                    <com.badoualy.stepperindicator.StepperIndicator
+                        android:id="@+id/stepper_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:visibility="visible"
+                        app:stpi_stepCount="3" />
+                    -->
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
+
+                    <com.badoualy.stepperindicator.StepperIndicator
+                        android:id="@+id/stepper_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="32dp"
+                        app:stpi_labels="@array/stepLabels"
+                        app:stpi_circleRadius="15dp"
+                        app:stpi_indicatorColor="#28a745"
+                        />
+                </LinearLayout>
+
+                <!--Begin Step 1-->
+                <LinearLayout
+                    android:id="@+id/layout_step_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp">
+
+                            <EditText
+                                android:id="@+id/txtFullName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Full Name."
+                                android:inputType="textPersonName"
+                                android:text="ami" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <EditText
+                                android:id="@+id/txtEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Email"
+                                android:inputType="textEmailAddress"
+                                android:text="ami@gmail.com" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <EditText
+                                android:id="@+id/txtMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Mobile"
+                                android:inputType="phone"
+                                android:text="01672708329" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      android:orientation="horizontal"
+                      android:layout_marginRight="20dp"
+                      android:layout_marginLeft="20dp"
+                      android:gravity="right"
+                      android:weightSum="3">
+
+
+                      <Button
+                          android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:text="Previous"
+                          android:layout_weight="1.1"
+                          android:visibility="gone"
+                          android:textColor="@color/btn_steps_text_color"
+                          android:drawableLeft="@drawable/left_arrow"
+                           />
+
+                      <Button
+                          android:id="@+id/btnNextStep_1"
+                          android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1.1"
+                          android:text="Next"
+                          android:drawableRight="@drawable/right_arrow"
+                          android:background="@drawable/step_button_pressed"
+                          android:textColor="@color/btn_steps_text_color"
+                          android:gravity="center"
+                          android:paddingLeft="10dp"
+                          android:paddingRight="10dp" />
+
+                  </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!--End Step 1-->
+
+
+                <!--Begin Step 2-->
+                <LinearLayout
+                    android:id="@+id/layout_step_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp">
+
+                            <EditText
+                                android:id="@+id/txtPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Password."
+                                android:inputType="textPassword"
+                                android:password="true"
+                                android:text="1Shadhin%" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <EditText
+                                android:id="@+id/txtConfirmPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Confirm Password"
+                                android:inputType="textPassword"
+                                android:password="true"
+                                android:text="1Shadhin%" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <CheckBox
+                                android:id="@+id/chkAndroid"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:text="Terms Check"
+                                android:textSize="16sp"
+                                android:checked="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:weightSum="3">
+
+
+                        <Button
+                            android:id="@+id/btnPreviousStep_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Previous"
+                            android:layout_weight="1.1"
+                            android:drawableLeft="@drawable/left_arrow"
+                            android:background="@drawable/step_button_pressed"
+                            android:textColor="@color/btn_steps_text_color"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                          android:layout_marginRight="10dp"/>
+
+                        <Button
+                            android:id="@+id/btnRegistration"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.1"
+                            android:text="Submit"
+                            android:background="@drawable/login_button_pressed"
+                            android:textColor="@color/btn_submit_text_color"
+
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!--End Step 1-->
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/header_footer_bankground_border_color"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_era_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Era info"
+            android:textColor="#1f62af"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

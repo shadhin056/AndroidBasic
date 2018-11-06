@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     Button restapiListViewBtn;
     Button restApiMyBtn;
     Button pick_image;
+    Button btn_restapi_reg;
+    Button btn_restapi_login;
     ImageView profile_image;
     ImageButton calenderButton;
     AwesomeValidation awesomeValidation;
@@ -119,7 +121,21 @@ public class MainActivity extends AppCompatActivity {
         restapiListViewBtn = findViewById(R.id.restapi_list_view_btn);
         pick_image = findViewById(R.id.pick_image_btn);
         profile_image = findViewById(R.id.profile_image);
-
+        btn_restapi_reg = findViewById(R.id.btn_restapi_reg);
+        btn_restapi_login = findViewById(R.id.btn_restapi_login);
+        btn_restapi_reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Registration.class);
+                startActivity(intent);
+            }
+        });btn_restapi_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Registration.class);
+                startActivity(intent);
+            }
+        });
         pick_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
