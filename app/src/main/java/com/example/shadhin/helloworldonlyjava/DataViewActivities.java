@@ -103,7 +103,7 @@ public class DataViewActivities extends AppCompatActivity {
 
     public void load_data() {
         listnewsData.clear();
-        if (name_insert != null) {
+       /* if (name_insert != null) {
             ContentValues values = new ContentValues();
             values.put(DBManager.COL_USERNAME, name_insert);
             values.put(DBManager.COL_PHONE, phone_insert);
@@ -122,7 +122,7 @@ public class DataViewActivities extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Can not inserted : ", Toast.LENGTH_LONG).show();
             }
-        }
+        }*/
 
         //adapter class
         String DESC = "ID DESC";

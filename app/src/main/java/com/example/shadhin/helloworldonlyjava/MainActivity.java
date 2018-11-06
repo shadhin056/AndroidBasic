@@ -2,10 +2,12 @@ package com.example.shadhin.helloworldonlyjava;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -26,6 +28,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -274,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
+                    load_data();
                     // Toast.makeText(MainActivity.this, "Date Received Successfully", Toast.LENGTH_SHORT).show();
                     //birthdayTextView.setText("Selected Date: " + birthDay.getText());
                     // setContentView(R.layout.form_data_view);
@@ -424,5 +428,46 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         dialog.show();
+    }
+    public void load_data() {
+        ContentValues values = new ContentValues();
+
+        // for image
+       /* profile_image.setDrawingCacheEnabled(true);
+        profile_image.buildDrawingCache();
+        Bitmap bitmap = profile_image.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();*/
+
+
+
+        //dbManager.addToDbImage(data);
+       /* String[] SelectionArgs = {email.getText().toString()};
+        int id = dbManager.update(values, "Email=?", SelectionArgs);
+        if (id > 0) {
+            Toast.makeText(getApplicationContext(), "Data is Updated", Toast.LENGTH_LONG).show();
+            //loadPic();
+        } else {
+            Toast.makeText(getApplicationContext(), "Data is not Updated", Toast.LENGTH_LONG).show();
+        }*/
+        //end image to db
+
+
+       // values.put(DBManager.COL_ProfilePic, data);
+        values.put(DBManager.COL_USERNAME, nickName.getText().toString());
+        values.put(DBManager.COL_PHONE, phoneNumber.getText().toString());
+        values.put(DBManager.COL_BIRTHDAY, birthDay.getText().toString());
+        values.put(DBManager.COL_EMAIL, email.getText().toString());
+        values.put(DBManager.COL_PASSWORD,  password.getText().toString());
+        long id = dbManager.insert(values);
+
+
+        if (id > 0) {
+            Toast.makeText(getApplicationContext(), "Data is added and user id : " + id, Toast.LENGTH_LONG).show();
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Can not inserted : ", Toast.LENGTH_LONG).show();
+        }
     }
 }
