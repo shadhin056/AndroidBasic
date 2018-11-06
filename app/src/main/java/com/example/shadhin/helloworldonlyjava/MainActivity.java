@@ -20,12 +20,14 @@ import android.os.Bundle;
 import android.app.DatePickerDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     EditText rePassword;
     TextView birthdayTextView;
+    Spinner SpPresentCountry;
     Button submitButton;
     Button resetButton;
     Button randomButton;
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //find id
+        SpPresentCountry = (Spinner) findViewById(R.id.SpPresentCountry);
         restApiMyBtn = findViewById(R.id.restapi_myjson);
         nickName = findViewById(R.id.nick_name);
         phoneNumber = findViewById(R.id.phone_numer);
@@ -127,6 +131,15 @@ public class MainActivity extends AppCompatActivity {
         btn_restapi_reg = findViewById(R.id.btn_restapi_reg);
         btn_restapi_login = findViewById(R.id.btn_restapi_login);
         txtGender = findViewById(R.id.txtGender);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this,
+                R.array.country, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        SpPresentCountry.setAdapter(adapter);
+
+
         txtGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -351,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("password1", password.getText().toString());
                     intent.putExtra("repassword1", rePassword.getText().toString());
                     intent.putExtra("gender", selectedGenderType);
+                    intent.putExtra("country", SpPresentCountry.getSelectedItem().toString());
                     startActivity(intent);
                 } else {
                     // Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -622,6 +636,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(DBManager.COL_EMAIL, email.getText().toString());
         values.put(DBManager.COL_PASSWORD,  password.getText().toString());
         values.put(DBManager.COL_GENDER,  selectedGenderType);
+        values.put(DBManager.COL_COUNTRY,  SpPresentCountry.getSelectedItem().toString());
         long id = dbManager.insert(values);
 
 

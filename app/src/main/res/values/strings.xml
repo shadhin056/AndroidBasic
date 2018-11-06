@@ -123,4 +123,11 @@
 
     </string-array>
     <string name="title_activity_welcome__nav">Welcome To ERA PAY</string>
+    <string-array name="country">
+        <item>Bangladesh</item>
+        <item>India</item>
+        <item>Pakishtan</item>
+        <item>USA</item>
+    </string-array>
+
 </resources>

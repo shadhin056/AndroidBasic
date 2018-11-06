@@ -80,7 +80,18 @@
                 android:hint="@string/enter_password"
                 android:inputType="textWebPassword" />
             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="Country"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                  />
 
+            <Spinner
+                android:id="@+id/SpPresentCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/reenter_password"
                 android:layout_width="match_parent"
