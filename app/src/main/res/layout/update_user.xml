@@ -52,7 +52,25 @@
 
     </RelativeLayout>
 
+    <RadioGroup
+        android:id="@+id/txtGender1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="male" />
+
+        <RadioButton
+            android:id="@+id/F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="female" />
+
+    </RadioGroup>
     <EditText
             android:id="@+id/up_email"
             android:layout_width="match_parent"

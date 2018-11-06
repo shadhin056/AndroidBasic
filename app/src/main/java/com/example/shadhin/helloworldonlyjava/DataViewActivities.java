@@ -150,7 +150,9 @@ public class DataViewActivities extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME)),
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL)),
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE)),
-                        cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY))));
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY)),
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_GENDER)),
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_COUNTRY))));
             } while (cursor.moveToNext());
             Toast.makeText(getApplicationContext(), tableData, Toast.LENGTH_LONG).show();
         }
@@ -201,6 +203,10 @@ public class DataViewActivities extends AppCompatActivity {
             email.setText(s.email);
             TextView birthday = (TextView) myView.findViewById(R.id.a_birthday_id);
             birthday.setText(s.birthday);
+            TextView gender = (TextView) myView.findViewById(R.id.a_gender);
+            gender.setText(s.gender);
+            TextView country = (TextView) myView.findViewById(R.id.a_country);
+            country.setText(s.country);
 
             Button btnDelete = (Button) myView.findViewById(R.id.btn_delete);
             btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +229,8 @@ public class DataViewActivities extends AppCompatActivity {
                     intent.putExtra("phone_number2", String.valueOf(s.phone));
                     intent.putExtra("birthday2", String.valueOf(s.birthday));
                     intent.putExtra("email2", String.valueOf(s.email));
+                    intent.putExtra("gender2", String.valueOf(s.gender));
+                    intent.putExtra("country2", String.valueOf(s.country));
                     intent.putExtra("id2", String.valueOf(s.id));
                     startActivity(intent);
                 }

@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_restapi_login;
     ImageView profile_image;
     RadioGroup txtGender;
+
     ImageButton calenderButton;
     AwesomeValidation awesomeValidation;
     DBManager dbManager;
