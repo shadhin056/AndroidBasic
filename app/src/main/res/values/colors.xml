@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="btn_steps_text_color">#FFFFFF</color>
     <color name="btn_submit_text_color">#FFFFFF</color>
+    <color name="grey_10">#e6e6e6</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="blue_grey_300">#90A4AE</color>
+    <color name="colorPrimaryLight">#1E88E5</color>
+    <color name="grey_20">#cccccc</color>
+
 </resources>

@@ -1,93 +1,217 @@
 package com.example.shadhin.helloworldonlyjava;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.example.shadhin.helloworldonlyjava.ip.IPConfigure;
+import com.example.shadhin.helloworldonlyjava.util.AsteriskPasswordTransformationMethod;
+import com.example.shadhin.helloworldonlyjava.util.CheckNetwork;
+import com.example.shadhin.helloworldonlyjava.util.CustomStyle;
+import com.example.shadhin.helloworldonlyjava.util.GlobalVariable;
+import com.example.shadhin.helloworldonlyjava.volley.VoleyErrorHandling;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static android.util.Log.e;
 
 public class Login extends AppCompatActivity {
-    Button regBtn;
-    Button loginBtn;
-    EditText email;
-    EditText password;
-    DBManager dbManager;
+
+    Button btnLogin;
+    TextView btnRegistration;
+
+    private static String url_login = IPConfigure.getIP() + "signInRest.do";
+    private SweetAlertDialog pDialog;
+
+    EditText txtEmail;
+    EditText txtPassword;
+    private GlobalVariable globalVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_page);
-        regBtn = findViewById(R.id.reg_btn);
-        loginBtn = findViewById(R.id.login_btn);
-        Button fixedData = findViewById(R.id.fixed_data);
+        setContentView(R.layout.login);
 
-        email = findViewById(R.id.login_email);
-        password = findViewById(R.id.login_password);
+      //  globalVariable = ((GlobalVariable) getApplicationContext());
 
-        dbManager = new DBManager(this);
-        regBtn.setOnClickListener(new View.OnClickListener() {
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //View title = getWindow().findViewById(android.R.id.title);
+        //View titleBar = (View) title.getParent();
+        //titleBar.setBackgroundColor(Color.RED);
+       // setTitleColor(Color.BLUE);
+
+
+        pDialog = CustomStyle.showProgressDialog(Login.this);
+
+
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegistration = (TextView) findViewById(R.id.btnRegistration);
+
+        txtEmail = (EditText) findViewById(R.id.txtEmail1);
+        txtPassword = (EditText) findViewById(R.id.txtPassword1);
+
+        txtPassword.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+
+       //txtEmail.setText("enamul@erainfotechbd.com");
+        //txtPassword.setText("Era123456@");
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, MainActivity.class);
+
+                //Intent intent = new Intent(Login.this, KYC.class);
+               // startActivity(intent);
+
+               if(txtEmail.getText().toString().isEmpty()){
+                    CustomStyle.showErrorMessage(Login.this,"","Please Enter Your Email");
+                }else if(txtPassword.getText().toString().isEmpty()){
+                    CustomStyle.showErrorMessage(Login.this,"","Please Enter Your Password");
+                }else if(CheckNetwork.isOnline(Login.this) == false){
+                    CustomStyle.showInternetConnectionMessage(Login.this,"");
+                }else{
+                   //globalVariable.setEmail(txtEmail.getText().toString());
+                   loginAction();
+
+
+                   /*
+                   Intent intent = new Intent(Login.this, Welcome_Nav.class);
+                   intent.putExtra("email",txtEmail.getText().toString());
+                    startActivity(intent);
+                    */
+
+
+                   
+                }
+
+
+            }
+        });
+
+       btnRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, DataViewActivities.class);
                 startActivity(intent);
             }
         });
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String DESC = "ID DESC";
-                String[] selectionsArgs = {email.getText().toString(), password.getText().toString()};
-                Cursor cursor = dbManager.query(null, "Email like ? and Password like ?", selectionsArgs, DESC, "1");
-            /*    if (cursor!=null){
-                    Toast.makeText(Login.this,email.getText().toString()+" and "+password.getText().toString(),Toast.LENGTH_LONG).show();
 
-                }else {
-                    Toast.makeText(Login.this,"Not found",Toast.LENGTH_LONG).show();
-                }*/
-                Intent intent = new Intent(Login.this, AfterLogin.class);
-                if (cursor.moveToFirst()) {
-                    String tableData = "";
-                    do {
-                /*tableData+=cursor.getString(cursor.getColumnIndex(DBManager.COL_ID))+","+
-                                cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME))+","+
-                                cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL))+","+
-                                cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY))+","+
-                                cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE))+"::";*/
+    }
 
-                        intent.putExtra("nick_name3", cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME)));
-                        intent.putExtra("phone_number3", cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE)));
-                        intent.putExtra("birthday3", cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY)));
-                        intent.putExtra("email3", cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL)));
-                        intent.putExtra("password3", cursor.getString(cursor.getColumnIndex(DBManager.COL_PASSWORD)));
-                        if(cursor.getBlob(cursor.getColumnIndex(DBManager.COL_ProfilePic))!=null){
-                            intent.putExtra("propic3", cursor.getBlob(cursor.getColumnIndex(DBManager.COL_ProfilePic)).toString());
+
+    private void loginAction() {
+        pDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_login,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        pDialog.dismiss();
+
+                        Log.e("response======>",response);
+
+
+                        try {
+                         //   JSONObject jsonObject = new JSONObject(response);
+                            //JSONArray loginNodes = jsonObject.getJSONArray("payoneerInfoNodes");
+
+                            JSONObject jObj = new JSONObject(response);
+                            String Response_Code = jObj.getString("Response_Code");
+
+                            String Response_Status = jObj.getString("Response_Status");
+
+                              if("0".equals(Response_Code)){
+                                  /*String User_Name = jObj.getString("User_Name");
+                                  String Session = jObj.getString("Session");
+                                  String CusCode = jObj.getString("CusCode");
+                                  String Wallet_ID = jObj.getString("Wallet_ID");
+                                  String current_Bal = jObj.getString("current_Bal");
+                                  String MobileNo = jObj.getString("MobileNo");*/
+
+
+                                 /* globalVariable.setUsername(User_Name);
+                                  globalVariable.setSessionid(Session);
+                                  globalVariable.setCuscode(CusCode);
+                                  globalVariable.setWaletid(Wallet_ID);
+                                  globalVariable.setCurrentbalance(current_Bal);
+                                  globalVariable.setMobileno(MobileNo);
+                                  globalVariable.setEmail(txtEmail.getText().toString());*/
+                                  Intent intent = new Intent(Login.this, DataViewActivities.class);
+                                  startActivity(intent);
+
+                              }else if ("2".equals(Response_Code)) {
+                                  Intent intent = new Intent(Login.this, DataViewActivities.class);
+                                  //globalVariable.setEmail(txtEmail.getText().toString());
+                                  //intent.putExtra("email",txtEmail.getText().toString());
+                                  startActivity(intent);
+                              }else{
+                                  Log.e("response======>er",response);
+                                  CustomStyle.showErrorMessage(Login.this,"",Response_Status);
+                              }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
-                    } while (cursor.moveToNext());
-
-
-                   /* intent.putExtra("nick_name3", email.getText().toString());
-                    intent.putExtra("password3", password.getText().toString());
-
-*/
-                    startActivity(intent);
-                    //Toast.makeText(getApplicationContext(), "Loged in" + cursor.getColumnIndex(DBManager.COL_ProfilePic), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please insert currect email and password", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-        fixedData.setOnClickListener(new View.OnClickListener() {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        e("Err", error.toString());
+                    }
+                }) {
             @Override
-            public void onClick(View v) {
-                email.setText("shadhinemail@gmail.com");
-                password.setText("123456");
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("api_pass", "usersignin");
+                params.put("emailid", txtEmail.getText().toString());
+                params.put("password", txtPassword.getText().toString());
+                return params;
             }
-        });
+
+
+        };
+
+        //Begin set Time Out
+        new VoleyErrorHandling(stringRequest);
+        //End set Time out
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

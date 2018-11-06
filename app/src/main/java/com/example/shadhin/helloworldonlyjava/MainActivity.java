@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         });btn_restapi_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Registration.class);
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         quickLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, LoginWithOutApi.class);
                 startActivity(intent);
             }
         });
