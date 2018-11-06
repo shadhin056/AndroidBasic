@@ -10,8 +10,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AfterLogin extends AppCompatActivity {
@@ -57,7 +62,9 @@ public class AfterLogin extends AppCompatActivity {
     Button upIntoDbBtn;
     ImageView profile_image;
     ImageView profileImageFromDb;
-
+    Button btn_add_note;
+    Button btn_load;
+    Button btn_reg;
     DBManager dbManager;
     private static final String IMAGE_DIRECTORY = "/image_store";
     private int GALLERY = 1, CAMERA = 2;
@@ -75,7 +82,9 @@ public class AfterLogin extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         upIntoDbBtn = findViewById(R.id.up_into_db_btn);
         profileImageFromDb = findViewById(R.id.profile_image_from_db);
-
+        btn_add_note = findViewById(R.id.btn_add_note);
+        btn_reg = (Button) findViewById(R.id.btn_reg);
+        btn_load = findViewById(R.id.btn_load);
         dbManager = new DBManager(this);
         sessionId1 = getIntent().getStringExtra("nick_name3");
         sessionId2 = getIntent().getStringExtra("phone_number3");
@@ -107,7 +116,27 @@ public class AfterLogin extends AppCompatActivity {
         birthday.setText(sessionId3);
         email.setText(sessionId4);
         password.setText(sessionId5);
-
+        btn_reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLogin.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_add_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLogin.this, Note.class);
+                intent.putExtra("email", getIntent().getStringExtra("email3"));
+                startActivity(intent);
+            }
+        });
+        btn_load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLoad();
+            }
+        });
         upIntoDbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +170,69 @@ public class AfterLogin extends AppCompatActivity {
                 showPictureDialog();
             }
         });
+
+    }
+
+    public void onLoad(){
+        //adapter class
+
+        ArrayList<NoteItem> listnewsData = new ArrayList<NoteItem>();
+        MyCustomAdapter myadapter;
+        String DESC = "ID DESC";
+        String[] selectionsArgs = {getIntent().getStringExtra("email3")};
+        Cursor cursor = dbManager.query1(null, "Email like ?",selectionsArgs , DESC, null);
+        if (cursor.moveToFirst()) {
+            String tableData = "";
+            do {
+                /*tableData+=cursor.getString(cursor.getColumnIndex(DBManager.COL_ID))+","+
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME))+","+
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL))+","+
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY))+","+
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE))+"::";*/
+                listnewsData.add(new NoteItem(cursor.getString(cursor.getColumnIndex(DBManager.COL_ID)),
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_NOTE))));
+            } while (cursor.moveToNext());
+            Toast.makeText(getApplicationContext(), tableData, Toast.LENGTH_LONG).show();
+        }
+        //add data and view it
+        myadapter = new MyCustomAdapter(listnewsData);
+        ListView lsNews = (ListView) findViewById(R.id.lv_note);
+        lsNews.setAdapter(myadapter);//intisal with data
+    }
+
+    private class MyCustomAdapter extends BaseAdapter {
+        public ArrayList<NoteItem> listnewsDataAdpater;
+
+        public MyCustomAdapter(ArrayList<NoteItem> listnewsDataAdpater) {
+            this.listnewsDataAdpater = listnewsDataAdpater;
+        }
+
+        @Override
+        public int getCount() {
+            return listnewsDataAdpater.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater mInflater = getLayoutInflater();
+            View myView = mInflater.inflate(R.layout.note, null);
+            final NoteItem s = listnewsDataAdpater.get(position);
+            TextView id = (TextView) myView.findViewById(R.id.txt_note_id);
+            id.setText(s.id);
+            TextView name = (TextView) myView.findViewById(R.id.txt_note);
+            name.setText(s.note);
+            return myView;
+        }
 
     }
 

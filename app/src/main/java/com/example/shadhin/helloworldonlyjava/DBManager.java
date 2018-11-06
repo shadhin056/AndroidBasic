@@ -13,6 +13,7 @@ public class DBManager {
 
     static final String DB_NAME = "DB_Login_Reg";
     static final String TABLE_NAME = "Users";
+    static final String TABLE_NAME1 = "Note";
     static final String COL_ID = "ID";
     static final String COL_USERNAME = "UserName";
     static final String COL_EMAIL = "Email";
@@ -20,9 +21,11 @@ public class DBManager {
     static final String COL_PHONE = "Phone";
     static final String COL_BIRTHDAY = "Birthday";
     static final String COL_ProfilePic = "ProfilePic";
+    static final String COL_NOTE = "Note";
     static final int DBVersion = 1;
     static final String CreateTable = "Create table IF NOT EXISTS " + TABLE_NAME + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_USERNAME + " text," + COL_BIRTHDAY
             + " text," + COL_EMAIL + " text," + COL_PASSWORD + " text," + COL_PHONE + " text," + COL_ProfilePic + " BLOB DEFAULT NUll" + " );";
+    static final String CreateTable1 = "Create table IF NOT EXISTS " + TABLE_NAME1 + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_EMAIL + " text," + COL_NOTE + " text" + ");";
 
     static class DatabaseHelperUser extends SQLiteOpenHelper {
         Context context;
@@ -36,11 +39,14 @@ public class DBManager {
         public void onCreate(SQLiteDatabase db) {
             Toast.makeText(context, "Table is created", Toast.LENGTH_LONG).show();
             db.execSQL(CreateTable);
+            db.execSQL(CreateTable1);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL(" Drop table IF EXISTS " + TABLE_NAME);
+            onCreate(db);
+            db.execSQL(" Drop table IF EXISTS " + TABLE_NAME1);
             onCreate(db);
         }
     }
@@ -54,11 +60,21 @@ public class DBManager {
         long id = sqlDB.insert(TABLE_NAME, "", values);
         return id;
     }
+    public long insert1(ContentValues values) {
+        long id = sqlDB.insert(TABLE_NAME1, "", values);
+        return id;
+    }
 
     //select username,password from logins where id=1
     public Cursor query(String[] Projection, String Selection, String[] SelectionArgs, String SortOrder, String limit) {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         qb.setTables(TABLE_NAME);
+        Cursor cursor = qb.query(sqlDB, Projection, Selection, SelectionArgs, null, null, SortOrder, limit);
+        return cursor;
+    }
+    public Cursor query1(String[] Projection, String Selection, String[] SelectionArgs, String SortOrder, String limit) {
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables(TABLE_NAME1);
         Cursor cursor = qb.query(sqlDB, Projection, Selection, SelectionArgs, null, null, SortOrder, limit);
         return cursor;
     }
