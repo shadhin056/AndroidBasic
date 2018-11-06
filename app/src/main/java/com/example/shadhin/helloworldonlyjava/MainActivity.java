@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,12 +61,14 @@ public class MainActivity extends AppCompatActivity {
     Button quickDataLoad;
     Button quickLogin;
     Button restApiBtn;
+    String selectedGenderType = "M";
     Button restapiListViewBtn;
     Button restApiMyBtn;
     Button pick_image;
     Button btn_restapi_reg;
     Button btn_restapi_login;
     ImageView profile_image;
+    RadioGroup txtGender;
     ImageButton calenderButton;
     AwesomeValidation awesomeValidation;
     DBManager dbManager;
@@ -123,6 +126,26 @@ public class MainActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         btn_restapi_reg = findViewById(R.id.btn_restapi_reg);
         btn_restapi_login = findViewById(R.id.btn_restapi_login);
+        txtGender = findViewById(R.id.txtGender);
+        txtGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                View radioButton = radioGroup.findViewById(i);
+                int index = radioGroup.indexOfChild(radioButton);
+
+
+                if (index == 0) {
+                    selectedGenderType = "M";
+
+                } else {
+                    selectedGenderType = "F";
+
+                }
+
+               /* Log.e("--Index", index + "");
+                Log.e("--selectedGenderType", selectedGenderType);*/
+            }
+        });
         btn_restapi_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,6 +350,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("email1", email.getText().toString());
                     intent.putExtra("password1", password.getText().toString());
                     intent.putExtra("repassword1", rePassword.getText().toString());
+                    intent.putExtra("gender", selectedGenderType);
                     startActivity(intent);
                 } else {
                     // Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -597,6 +621,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(DBManager.COL_BIRTHDAY, birthDay.getText().toString());
         values.put(DBManager.COL_EMAIL, email.getText().toString());
         values.put(DBManager.COL_PASSWORD,  password.getText().toString());
+        values.put(DBManager.COL_GENDER,  selectedGenderType);
         long id = dbManager.insert(values);
 
 

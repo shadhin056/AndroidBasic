@@ -52,12 +52,14 @@ public class AfterLogin extends AppCompatActivity {
     TextView phone;
     TextView password;
     TextView birthday;
+    TextView after_login_gender;
     String sessionId1;
     String sessionId2;
     String sessionId3;
     String sessionId4;
     String sessionId5;
     String sessionId6;
+    String sessionId7;
     Button pick_image;
     Button upIntoDbBtn;
     ImageView profile_image;
@@ -79,6 +81,7 @@ public class AfterLogin extends AppCompatActivity {
         birthday = findViewById(R.id.after_login_birthday_display);
         password = findViewById(R.id.after_login_password);
         pick_image = findViewById(R.id.pick_image_btn);
+        after_login_gender = findViewById(R.id.after_login_gender);
         profile_image = findViewById(R.id.profile_image);
         upIntoDbBtn = findViewById(R.id.up_into_db_btn);
         profileImageFromDb = findViewById(R.id.profile_image_from_db);
@@ -92,6 +95,7 @@ public class AfterLogin extends AppCompatActivity {
         sessionId4 = getIntent().getStringExtra("email3");
         sessionId5 = getIntent().getStringExtra("password3");
         sessionId6 = getIntent().getStringExtra("propic3");
+        sessionId7 = getIntent().getStringExtra("gender3");
         //Bitmap testImage = sessionId6.getImageDataInBitmap();
 
         String[] selectionsArgs = {sessionId4, sessionId5};
@@ -116,6 +120,7 @@ public class AfterLogin extends AppCompatActivity {
         birthday.setText(sessionId3);
         email.setText(sessionId4);
         password.setText(sessionId5);
+        after_login_gender.setText(sessionId7);
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

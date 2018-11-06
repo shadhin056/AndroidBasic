@@ -20,11 +20,12 @@ public class DBManager {
     static final String COL_PASSWORD = "Password";
     static final String COL_PHONE = "Phone";
     static final String COL_BIRTHDAY = "Birthday";
+    static final String COL_GENDER = "Gender";
     static final String COL_ProfilePic = "ProfilePic";
     static final String COL_NOTE = "Note";
     static final int DBVersion = 1;
     static final String CreateTable = "Create table IF NOT EXISTS " + TABLE_NAME + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_USERNAME + " text," + COL_BIRTHDAY
-            + " text," + COL_EMAIL + " text," + COL_PASSWORD + " text," + COL_PHONE + " text," + COL_ProfilePic + " BLOB DEFAULT NUll" + " );";
+            + " text," + COL_EMAIL + " text," + COL_PASSWORD + " text," + COL_PHONE + " text," + COL_GENDER + " text," + COL_ProfilePic + " BLOB DEFAULT NUll" + " );";
     static final String CreateTable1 = "Create table IF NOT EXISTS " + TABLE_NAME1 + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_EMAIL + " text," + COL_NOTE + " text" + ");";
 
     static class DatabaseHelperUser extends SQLiteOpenHelper {
