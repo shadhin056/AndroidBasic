@@ -53,6 +53,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     DatePickerDialog picker;
     EditText nickName;
+    EditText user_name;
     EditText phoneNumber;
     EditText birthDay;
     EditText email;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         restApiMyBtn = findViewById(R.id.restapi_myjson);
         nickName = findViewById(R.id.nick_name);
         phoneNumber = findViewById(R.id.phone_numer);
+        user_name = findViewById(R.id.user_name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         rePassword = findViewById(R.id.reenter_password);
@@ -186,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         //https://github.com/thyrlian/AwesomeValidation
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(MainActivity.this, R.id.nick_name, "[a-zA-Z\\s]+", R.string.error_nickName);
+        awesomeValidation.addValidation(MainActivity.this, R.id.user_name, "[a-zA-Z\\s]+", R.string.error_nickName);
         // awesomeValidation.addValidation(MainActivity.this,R.id.phone_numer, RegexTemplate.TELEPHONE,R.string.error_phoneNumber);
         awesomeValidation.addValidation(MainActivity.this, R.id.phone_numer, "[0-9\\s]+", R.string.error_phoneNumber);
         awesomeValidation.addValidation(MainActivity.this, R.id.email, android.util.Patterns.EMAIL_ADDRESS, R.string.error_email);
@@ -316,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nickName.setText("shadhin");
+                user_name.setText("shadhin");
                 email.setText("shadhinemail@gmail.com");
                 phoneNumber.setText("01672708329");
                 birthDay.setText("31/12/1993");
@@ -360,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
                     // setContentView(R.layout.form_data_view);
                     Intent intent = new Intent(MainActivity.this, DataViewActivities.class);
 
+                    intent.putExtra("user_name1", user_name.getText().toString());
                     intent.putExtra("nick_name1", nickName.getText().toString());
                     intent.putExtra("phone_number1", phoneNumber.getText().toString());
                     intent.putExtra("birthday1", birthDay.getText().toString());
@@ -640,6 +645,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         values.put(DBManager.COL_ProfilePic, data);
+        values.put(DBManager.COL_USERNAME_MAIN, user_name.getText().toString());
         values.put(DBManager.COL_USERNAME, nickName.getText().toString());
         values.put(DBManager.COL_PHONE, phoneNumber.getText().toString());
         values.put(DBManager.COL_BIRTHDAY, birthDay.getText().toString());

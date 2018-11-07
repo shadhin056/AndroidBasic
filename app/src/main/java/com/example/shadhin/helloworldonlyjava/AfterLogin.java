@@ -66,6 +66,7 @@ public class AfterLogin extends AppCompatActivity {
     String sessionId9;
     Button pick_image;
     Button upIntoDbBtn;
+    Button btn_view_profile;
     ImageView profile_image;
     ImageView profileImageFromDb;
     Button btn_add_note;
@@ -90,6 +91,7 @@ public class AfterLogin extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         upIntoDbBtn = findViewById(R.id.up_into_db_btn);
         profileImageFromDb = findViewById(R.id.profile_image_from_db);
+        btn_view_profile = findViewById(R.id.btn_view_profile);
         btn_add_note = findViewById(R.id.btn_add_note);
         btn_reg = (Button) findViewById(R.id.btn_reg);
         btn_load = findViewById(R.id.btn_load);
@@ -143,6 +145,20 @@ public class AfterLogin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLogin.this, Note.class);
                 intent.putExtra("email", getIntent().getStringExtra("email3"));
+                startActivity(intent);
+            }
+        });
+        btn_view_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLogin.this, LogedIn.class);
+                intent.putExtra("user_name1",getIntent().getStringExtra("user_name3"));
+                intent.putExtra("nick_name1", getIntent().getStringExtra("nick_name3"));
+                intent.putExtra("phone_number1",getIntent().getStringExtra("phone_number3"));
+                intent.putExtra("birthday1", getIntent().getStringExtra("birthday3"));
+                intent.putExtra("email1", getIntent().getStringExtra("email3"));
+                intent.putExtra("password1", password.getText().toString());
+                intent.putExtra("propic1", getIntent().getStringExtra("propic3"));
                 startActivity(intent);
             }
         });

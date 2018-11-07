@@ -7,7 +7,7 @@
     android:paddingRight="16dp">
 
 
-       <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -25,10 +25,17 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:inputType="text" />
+
+            <EditText
                 android:id="@+id/nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_name"
+                android:hint="Full Name"
                 android:inputType="text" />
 
             <EditText
@@ -43,15 +50,18 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/up_birthday"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_birth_date"
                     android:inputType="text"
                     android:paddingRight="40dp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="31/12/1990" />
 
                 <ImageButton
+                    android:visibility="gone"
                     android:id="@+id/calender_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,18 +90,21 @@
                 android:hint="@string/enter_password"
                 android:inputType="textWebPassword" />
             />
+
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:text="Country"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                  />
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <Spinner
+                android:visibility="gone"
                 android:id="@+id/SpPresentCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <EditText
                 android:id="@+id/reenter_password"
                 android:layout_width="match_parent"
@@ -100,15 +113,18 @@
                 android:hint="@string/enter_password_again"
                 android:inputType="textWebPassword" />
             />
+
             <CheckBox
+                android:visibility="gone"
                 android:id="@+id/chk"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Agree"
-                android:textSize="16sp"
                 android:onClick="itemClicked"
-                />
+                android:text="Agree"
+                android:textSize="16sp" />
+
             <RadioGroup
+                android:visibility="gone"
                 android:id="@+id/txtGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,6 +149,7 @@
                     android:text="female" />
 
             </RadioGroup>
+
             <TextView
                 android:id="@+id/birthday_date_view"
                 android:layout_width="wrap_content"

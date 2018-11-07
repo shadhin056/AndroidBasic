@@ -21,11 +21,13 @@
             android:textStyle="bold"/>
 
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
         <TextView
+            android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/display_name"
@@ -45,11 +47,12 @@
 
     <LinearLayout
             android:layout_width="match_parent"
+        android:visibility="gone"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
         <TextView
-
+android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/display_phone"
@@ -67,16 +70,17 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/display_birthday"
-                android:textSize="18dp"
-                android:textStyle="bold"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/display_birthday"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
                 android:id="@+id/after_login_birthday_display"
@@ -89,11 +93,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
         <TextView
+            android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/display_email"
@@ -111,6 +117,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -132,6 +139,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -153,6 +161,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -174,6 +183,7 @@
 
     </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -200,6 +210,7 @@
             android:weightSum="10">
 
         <ImageView
+            android:visibility="gone"
                 android:id="@+id/profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,7 +225,7 @@
         >
 
             <Button
-
+                android:visibility="gone"
                     android:id="@+id/pick_image_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -222,6 +233,7 @@
                     android:text="Pick image"/>
 
             <Button
+                android:visibility="gone"
                     android:id="@+id/up_into_db_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -233,6 +245,7 @@
 
     </LinearLayout>
     <ImageView
+        android:visibility="gone"
             android:id="@+id/profile_image_from_db"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -253,11 +266,18 @@
             android:text="Add Note"/>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="registration"/>
+        <Button
+            android:id="@+id/btn_view_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="view profile"/>
 
         <Button
             android:id="@+id/btn_load"

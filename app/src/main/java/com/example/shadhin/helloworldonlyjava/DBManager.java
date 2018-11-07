@@ -15,6 +15,7 @@ public class DBManager {
     static final String TABLE_NAME = "Users";
     static final String TABLE_NAME1 = "Note";
     static final String COL_ID = "ID";
+    static final String COL_USERNAME_MAIN = "User";
     static final String COL_USERNAME = "UserName";
     static final String COL_EMAIL = "Email";
     static final String COL_PASSWORD = "Password";
@@ -26,7 +27,7 @@ public class DBManager {
     static final String COL_NOTE = "Note";
     static final String COL_AGREE = "Note";
     static final int DBVersion = 1;
-    static final String CreateTable = "Create table IF NOT EXISTS " + TABLE_NAME + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_USERNAME + " text," + COL_BIRTHDAY
+    static final String CreateTable = "Create table IF NOT EXISTS " + TABLE_NAME + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_USERNAME + " text," + COL_USERNAME_MAIN + " text," + COL_BIRTHDAY
             + " text," + COL_EMAIL + " text," + COL_PASSWORD + " text," + COL_PHONE + " text," + COL_GENDER + " text," + COL_AGREE + " text," + COL_COUNTRY + " text," + COL_ProfilePic + " BLOB DEFAULT NUll" + " );";
     static final String CreateTable1 = "Create table IF NOT EXISTS " + TABLE_NAME1 + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_EMAIL + " text," + COL_NOTE + " text" + ");";
 

@@ -57,6 +57,7 @@ public class LoginWithOutApi extends AppCompatActivity {
                                 cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY))+","+
                                 cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE))+"::";*/
 
+                        intent.putExtra("user_name3", cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME_MAIN)));
                         intent.putExtra("nick_name3", cursor.getString(cursor.getColumnIndex(DBManager.COL_USERNAME)));
                         intent.putExtra("phone_number3", cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE)));
                         intent.putExtra("birthday3", cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY)));
