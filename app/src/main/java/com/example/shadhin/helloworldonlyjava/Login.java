@@ -110,7 +110,7 @@ public class Login extends AppCompatActivity {
        btnRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, DataViewActivities.class);
+                Intent intent = new Intent(Login.this, Registration.class);
                 startActivity(intent);
             }
         });
@@ -154,11 +154,11 @@ public class Login extends AppCompatActivity {
                                   globalVariable.setCurrentbalance(current_Bal);
                                   globalVariable.setMobileno(MobileNo);
                                   globalVariable.setEmail(txtEmail.getText().toString());*/
-                                  Intent intent = new Intent(Login.this, DataViewActivities.class);
+                                  Intent intent = new Intent(Login.this, ApiLoginSUccess.class);
                                   startActivity(intent);
 
                               }else if ("2".equals(Response_Code)) {
-                                  Intent intent = new Intent(Login.this, DataViewActivities.class);
+                                  Intent intent = new Intent(Login.this, ApiLoginSUccess.class);
                                   //globalVariable.setEmail(txtEmail.getText().toString());
                                   //intent.putExtra("email",txtEmail.getText().toString());
                                   startActivity(intent);

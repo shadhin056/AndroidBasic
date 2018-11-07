@@ -239,6 +239,7 @@
                     android:textColor="@android:color/holo_orange_light" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/quick_load_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,6 +249,7 @@
                     android:textColor="@android:color/holo_purple" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/reset"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -266,6 +268,7 @@
                 android:weightSum="3">
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/restapi_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,6 +276,7 @@
                     android:text="RestfulApi" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/restapi_list_view_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -288,8 +292,9 @@
                 android:weightSum="3">
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/restapi_myjson"
-                    android:layout_width="match_parent"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="My Json RestfulApi"
@@ -297,7 +302,7 @@
 
                 <Button
                     android:id="@+id/btn_restapi_reg"
-                    android:layout_width="match_parent"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Rest Api Reg"
@@ -305,7 +310,7 @@
 
                 <Button
                     android:id="@+id/btn_restapi_login"
-                    android:layout_width="match_parent"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Rest Api login"

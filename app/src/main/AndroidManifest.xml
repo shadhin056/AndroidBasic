@@ -69,7 +69,8 @@
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Note" />
-        <activity android:name=".LogedIn"></activity>
+        <activity android:name=".LogedIn" />
+        <activity android:name=".ApiLoginSUccess"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -261,11 +262,7 @@
 
 
             </LinearLayout>
-            <ImageView
-                android:id="@+id/profile_image_from_db"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/boy"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -298,6 +295,13 @@
                     android:layout_weight="1"
                     android:text="Load Note"/>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/profileImageFromDb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boy" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
