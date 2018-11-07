@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -36,7 +37,10 @@ public class UserUpdate extends AppCompatActivity {
     String sessionId5;
     String sessionId6;
     String sessionId7;
+    String sessionId8;
+    String selected1;
     String selectedGenderType;
+    CheckBox checkBox1 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class UserUpdate extends AppCompatActivity {
         sessionId5 = getIntent().getStringExtra("id2");
         sessionId6 = getIntent().getStringExtra("gender2");
         sessionId7 = getIntent().getStringExtra("country2");
+        sessionId8 = getIntent().getStringExtra("agree2");
         SpPresentCountry1 = (Spinner) findViewById(R.id.SpPresentCountry1);
         String compareValue = sessionId7;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.country, android.R.layout.simple_spinner_item);
@@ -61,6 +66,7 @@ public class UserUpdate extends AppCompatActivity {
 
 
         txtGender1 = findViewById(R.id.txtGender1);
+        checkBox1 = (CheckBox) findViewById(R.id.chk1);
         M = findViewById(R.id.M);
         F = findViewById(R.id.F);
         if(sessionId6.equals("M")){
@@ -69,6 +75,16 @@ public class UserUpdate extends AppCompatActivity {
         }else {
             txtGender1.check(R.id.F);
             selectedGenderType="F";
+        }
+
+
+        if(sessionId8.equals("YES")){
+
+            checkBox1.setChecked(true);
+            selected1="YES";
+        }else {
+            checkBox1.setChecked(false);
+            selected1="NO";
         }
         //txtGender1.check(getIntent().getIntExtra("gender2", R.id.M));
         //txtGender1.check(getIntent().getIntExtra("gender2", R.id.F));
@@ -80,6 +96,7 @@ public class UserUpdate extends AppCompatActivity {
         upRePassword = findViewById(R.id.up_reenter_password);
         updateBtn = findViewById(R.id.update_user_btn);
         backBtn = findViewById(R.id.back_update);
+
 
         upName.setText(sessionId1);
         upPhone.setText(sessionId2);
@@ -118,6 +135,7 @@ public class UserUpdate extends AppCompatActivity {
                 values.put(DBManager.COL_ID, sessionId5);
                 values.put(DBManager.COL_GENDER, selectedGenderType);
                 values.put(DBManager.COL_COUNTRY,  SpPresentCountry1.getSelectedItem().toString());
+                values.put(DBManager.COL_AGREE,  selected1);
                 String[] SelectionArgs = {sessionId5};
                 int id = dbManager.update(values, "ID=?", SelectionArgs);
                 if (id > 0) {
@@ -140,5 +158,12 @@ public class UserUpdate extends AppCompatActivity {
         });
 
 
+    }
+    public void itemClicked1(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)v;
+        if(checkBox.isChecked()){
+            selected1="YES";
+        }
     }
 }

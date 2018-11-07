@@ -647,6 +647,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(DBManager.COL_PASSWORD,  password.getText().toString());
         values.put(DBManager.COL_GENDER,  selectedGenderType);
         values.put(DBManager.COL_COUNTRY,  SpPresentCountry.getSelectedItem().toString());
+        values.put(DBManager.COL_AGREE,  selected);
         long id = dbManager.insert(values);
 
 

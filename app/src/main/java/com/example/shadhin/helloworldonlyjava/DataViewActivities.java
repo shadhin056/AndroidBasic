@@ -157,7 +157,8 @@ public class DataViewActivities extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE)),
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY)),
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_GENDER)),
-                        cursor.getString(cursor.getColumnIndex(DBManager.COL_COUNTRY))));
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_COUNTRY)),
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_AGREE))));
             } while (cursor.moveToNext());
             Toast.makeText(getApplicationContext(), tableData, Toast.LENGTH_LONG).show();
         }
@@ -212,6 +213,8 @@ public class DataViewActivities extends AppCompatActivity {
             gender.setText(s.gender);
             TextView country = (TextView) myView.findViewById(R.id.a_country);
             country.setText(s.country);
+            TextView a_agree = (TextView) myView.findViewById(R.id.a_agree);
+            a_agree.setText(s.agree);
 
             Button btnDelete = (Button) myView.findViewById(R.id.btn_delete);
             btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +240,7 @@ public class DataViewActivities extends AppCompatActivity {
                     intent.putExtra("gender2", String.valueOf(s.gender));
                     intent.putExtra("country2", String.valueOf(s.country));
                     intent.putExtra("id2", String.valueOf(s.id));
+                    intent.putExtra("agree2", String.valueOf(s.agree));
                     startActivity(intent);
                 }
             });

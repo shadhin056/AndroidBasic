@@ -8,9 +8,10 @@ public class AdapterItems {
     public String birthday;
     public String gender;
     public String country;
+    public String agree;
 
     //for news details
-    AdapterItems(String id, String nickName, String email, String phone, String birthday, String gender, String country) {
+    AdapterItems(String id, String nickName, String email, String phone, String birthday, String gender, String country, String agree) {
         this.id = id;
         this.nickName = nickName;
         this.email = email;
@@ -18,5 +19,6 @@ public class AdapterItems {
         this.birthday = birthday;
         this.gender = gender;
         this.country = country;
+        this.agree = agree;
     }
 }

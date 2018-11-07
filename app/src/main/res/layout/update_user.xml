@@ -109,7 +109,14 @@
             android:hint="@string/enter_password_again"
             android:inputType="textWebPassword"/>
     />
-
+    <CheckBox
+        android:id="@+id/chk1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Agree"
+        android:textSize="16sp"
+        android:onClick="itemClicked1"
+        />
     <TextView
             android:id="@+id/birthday_date_view"
             android:layout_width="wrap_content"
