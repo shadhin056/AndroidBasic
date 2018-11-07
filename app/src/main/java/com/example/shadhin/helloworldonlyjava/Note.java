@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class Note extends AppCompatActivity {
     EditText txtnote;
     EditText txtemail;
+    EditText txtnotetitel;
     Button btn_add_note;
     DBManager dbManager;
     @Override
@@ -19,6 +20,7 @@ public class Note extends AppCompatActivity {
         setContentView(R.layout.activity_note);
         dbManager = new DBManager(this);
         txtnote=findViewById(R.id.txtnote);
+        txtnotetitel=findViewById(R.id.txtnotetitel);
         txtemail=findViewById(R.id.txtemail);
         txtemail.setText(getIntent().getStringExtra("email"));
         btn_add_note=findViewById(R.id.btn_add_note);
@@ -33,6 +35,7 @@ public class Note extends AppCompatActivity {
     private void load_data1() {
         ContentValues values = new ContentValues();
         values.put(DBManager.COL_EMAIL, txtemail.getText().toString());
+        values.put(DBManager.COL_NOTE_TITEL, txtnotetitel.getText().toString());
         values.put(DBManager.COL_NOTE,  txtnote.getText().toString());
         long id = dbManager.insert1(values);
 

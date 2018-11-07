@@ -24,12 +24,13 @@ public class DBManager {
     static final String COL_GENDER = "Gender";
     static final String COL_COUNTRY = "Country";
     static final String COL_ProfilePic = "ProfilePic";
+    static final String COL_NOTE_TITEL = "Titel";
     static final String COL_NOTE = "Note";
     static final String COL_AGREE = "Note";
     static final int DBVersion = 1;
     static final String CreateTable = "Create table IF NOT EXISTS " + TABLE_NAME + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_USERNAME + " text," + COL_USERNAME_MAIN + " text," + COL_BIRTHDAY
             + " text," + COL_EMAIL + " text," + COL_PASSWORD + " text," + COL_PHONE + " text," + COL_GENDER + " text," + COL_AGREE + " text," + COL_COUNTRY + " text," + COL_ProfilePic + " BLOB DEFAULT NUll" + " );";
-    static final String CreateTable1 = "Create table IF NOT EXISTS " + TABLE_NAME1 + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_EMAIL + " text," + COL_NOTE + " text" + ");";
+    static final String CreateTable1 = "Create table IF NOT EXISTS " + TABLE_NAME1 + "(ID integer PRIMARY KEY AUTOINCREMENT," + COL_EMAIL + " text," + COL_NOTE_TITEL + " text," + COL_NOTE + " text" + ");";
 
     static class DatabaseHelperUser extends SQLiteOpenHelper {
         Context context;

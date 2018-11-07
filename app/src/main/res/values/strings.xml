@@ -20,6 +20,7 @@
     <string name="error_birthDay">Enter correct formate and must be above 18years</string>
     <string name="error_email">Enter correct email formate</string>
     <string name="error_email_alreadyExist">Email already Exist !</string>
+    <string name="error_phone_alreadyExist">Phone already Exist !</string>
     <string name="error_password">Enter correct formate</string>
     <string name="error_rePassword">Password should be matched</string>
     <string name="all_name">Name</string>

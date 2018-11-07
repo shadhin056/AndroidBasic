@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         awesomeValidation.addValidation(MainActivity.this, R.id.nick_name, "[a-zA-Z\\s]+", R.string.error_nickName);
         awesomeValidation.addValidation(MainActivity.this, R.id.user_name, "[a-zA-Z\\s]+", R.string.error_nickName);
         // awesomeValidation.addValidation(MainActivity.this,R.id.phone_numer, RegexTemplate.TELEPHONE,R.string.error_phoneNumber);
-        awesomeValidation.addValidation(MainActivity.this, R.id.phone_numer, "[0-9\\s]+", R.string.error_phoneNumber);
+        //awesomeValidation.addValidation(MainActivity.this, R.id.phone_numer, "[0-9\\s]+", R.string.error_phoneNumber);
         awesomeValidation.addValidation(MainActivity.this, R.id.email, android.util.Patterns.EMAIL_ADDRESS, R.string.error_email);
         // String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
         String regexPassword = "[a-zA-Z0-9\\s]+";
@@ -227,30 +227,43 @@ public class MainActivity extends AppCompatActivity {
             }
         }, R.string.error_birthDay);
 
+        awesomeValidation.addValidation(MainActivity.this, R.id.phone_numer, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String input) {
+                String string = "shadhinemail@gmail.com";
+                String[] selectionsArgs = {input};
+                Cursor cursor = dbManager.query(null, "Phone like ? ", selectionsArgs, null, "1");
+                String myStringArray = "";
+
+
+                // String[] myStringArrays = new String[10];
+                int i = 0;
+                try {
+                    if (cursor.moveToFirst()) {
+                        do {
+                            // myStringArray= cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL));
+                            myStringArray = cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE));
+
+                            Toast.makeText(MainActivity.this, cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE)), Toast.LENGTH_LONG).show();
+                        } while (cursor.moveToNext());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (myStringArray.equals(input)) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+
+            }
+        }, R.string.error_phone_alreadyExist);
+
         awesomeValidation.addValidation(MainActivity.this, R.id.email, new SimpleCustomValidation() {
             @Override
             public boolean compare(String input) {
-
-                // check if the age is >= 18
-
-                //String getEmail = email.getText().toString();
-               /*     Cursor cursor = dbManager.query(null, null, null, null, null);
-                    String email[]={};
-                    int i=0;
-                    int ee=0;
-                    String string="shadhinemail@gmail.com";
-                if (cursor.moveToFirst()) {
-                    do {
-                        email[i]= cursor.getString(cursor.getColumnIndex(DBManager.COL_EMAIL));
-                        i=i++;
-                        Toast.makeText(MainActivity.this, email[i], Toast.LENGTH_LONG).show();
-                    } while (cursor.moveToNext());
-                }
-                for (int ii=0;i<email.length;i++){
-                    if(string==input){
-                        ee++;
-                    }
-                }*/
                 String string = "shadhinemail@gmail.com";
                 String[] selectionsArgs = {input};
                 Cursor cursor = dbManager.query(null, "Email like ? ", selectionsArgs, null, "1");

@@ -221,7 +221,8 @@ public class AfterLogin extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_BIRTHDAY))+","+
                         cursor.getString(cursor.getColumnIndex(DBManager.COL_PHONE))+"::";*/
                 listnewsData.add(new NoteItem(cursor.getString(cursor.getColumnIndex(DBManager.COL_ID)),
-                        cursor.getString(cursor.getColumnIndex(DBManager.COL_NOTE))));
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_NOTE)),
+                        cursor.getString(cursor.getColumnIndex(DBManager.COL_NOTE_TITEL))));
             } while (cursor.moveToNext());
             Toast.makeText(getApplicationContext(), tableData, Toast.LENGTH_LONG).show();
         }
@@ -262,6 +263,8 @@ public class AfterLogin extends AppCompatActivity {
             id.setText(s.id);
             TextView name = (TextView) myView.findViewById(R.id.txt_note);
             name.setText(s.note);
+            TextView txt_note_titel = (TextView) myView.findViewById(R.id.txt_note_titel);
+            txt_note_titel.setText(s.noteTitel);
             return myView;
         }
 
