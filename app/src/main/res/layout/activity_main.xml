@@ -100,6 +100,14 @@
                 android:hint="@string/enter_password_again"
                 android:inputType="textWebPassword" />
             />
+            <CheckBox
+                android:id="@+id/chk"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Agree"
+                android:textSize="16sp"
+                android:onClick="itemClicked"
+                />
             <RadioGroup
                 android:id="@+id/txtGender"
                 android:layout_width="wrap_content"

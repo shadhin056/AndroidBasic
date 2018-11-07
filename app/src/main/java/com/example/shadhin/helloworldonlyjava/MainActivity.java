@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_restapi_login;
     ImageView profile_image;
     RadioGroup txtGender;
-
+    String selected="NO";
     ImageButton calenderButton;
     AwesomeValidation awesomeValidation;
     DBManager dbManager;
@@ -367,6 +368,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("repassword1", rePassword.getText().toString());
                     intent.putExtra("gender", selectedGenderType);
                     intent.putExtra("country", SpPresentCountry.getSelectedItem().toString());
+                    intent.putExtra("agree", selected);
                     startActivity(intent);
                 } else {
                     // Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -382,7 +384,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void itemClicked(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)v;
+        if(checkBox.isChecked()){
+            selected="YES";
+        }
+    }
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle("Select Action");

@@ -29,6 +29,7 @@ public class DataViewActivities extends AppCompatActivity {
     TextView passwordView;
     TextView gender;
     TextView country;
+    TextView agree;
     DBManager dbManager;
     Button loadData;
     Button regGoBack;
@@ -42,6 +43,7 @@ public class DataViewActivities extends AppCompatActivity {
     String sessionId6;
     String sessionId7;
     String sessionId8;
+    String sessionId9;
 
     String name_insert;
     String phone_insert;
@@ -67,6 +69,7 @@ public class DataViewActivities extends AppCompatActivity {
         gender = (TextView) findViewById(R.id.gender);
         loadData = (Button) findViewById(R.id.load_data);
         regGoBack = findViewById(R.id.reg_btn);
+        agree = findViewById(R.id.agree);
 
         dbManager = new DBManager(this);
         sessionId1 = getIntent().getStringExtra("nick_name1");
@@ -77,6 +80,7 @@ public class DataViewActivities extends AppCompatActivity {
         sessionId6 = getIntent().getStringExtra("repassword1");
         sessionId7 = getIntent().getStringExtra("gender");
         sessionId8 = getIntent().getStringExtra("country");
+        sessionId9 = getIntent().getStringExtra("agree");
 
 
         nameView.setText(sessionId1);
@@ -86,6 +90,7 @@ public class DataViewActivities extends AppCompatActivity {
         passwordView.setText(sessionId5);
         gender.setText(sessionId7);
         country.setText(sessionId8);
+        agree.setText(sessionId9);
 
         name_insert = sessionId1;
         phone_insert = sessionId2;
