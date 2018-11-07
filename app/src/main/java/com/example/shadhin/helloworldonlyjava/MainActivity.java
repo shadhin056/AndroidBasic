@@ -192,9 +192,12 @@ public class MainActivity extends AppCompatActivity {
         // awesomeValidation.addValidation(MainActivity.this,R.id.phone_numer, RegexTemplate.TELEPHONE,R.string.error_phoneNumber);
         //awesomeValidation.addValidation(MainActivity.this, R.id.phone_numer, "[0-9\\s]+", R.string.error_phoneNumber);
         awesomeValidation.addValidation(MainActivity.this, R.id.email, android.util.Patterns.EMAIL_ADDRESS, R.string.error_email);
-        // String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
-        String regexPassword = "[a-zA-Z0-9\\s]+";
-        awesomeValidation.addValidation(MainActivity.this, R.id.password, regexPassword, R.string.error_password);
+        //String regexPassword1 = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+        //String regexPassword = "[a-zA-Z0-9\\s]+";
+        //awesomeValidation.addValidation(MainActivity.this, R.id.password, "(?=.*[A-Z])", R.string.error_password1);
+        //awesomeValidation.addValidation(MainActivity.this, R.id.password, "(?=.*[!@#$%])", R.string.error_password2);
+        //awesomeValidation.addValidation(MainActivity.this, R.id.password, ".{8,}", R.string.error_password3);
+        awesomeValidation.addValidation(MainActivity.this, R.id.password, "^.*(?=.{8,8})(?=.*\\d)(?=.*[A-Z])(?=.*[a-z]).*$", R.string.error_password7);
         awesomeValidation.addValidation(MainActivity.this, R.id.reenter_password, R.id.password, R.string.error_rePassword);
         // to validate with a simple custom validator function
         awesomeValidation.addValidation(MainActivity.this, R.id.up_birthday, new SimpleCustomValidation() {
@@ -336,8 +339,8 @@ public class MainActivity extends AppCompatActivity {
                 email.setText("shadhinemail@gmail.com");
                 phoneNumber.setText("01672708329");
                 birthDay.setText("31/12/1993");
-                password.setText("123456");
-                rePassword.setText("123456");
+                password.setText("1Shadhin%");
+                rePassword.setText("1Shadhin%");
             }
         });
         quickLogin.setOnClickListener(new View.OnClickListener() {

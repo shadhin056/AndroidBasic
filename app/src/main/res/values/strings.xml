@@ -21,7 +21,12 @@
     <string name="error_email">Enter correct email formate</string>
     <string name="error_email_alreadyExist">Email already Exist !</string>
     <string name="error_phone_alreadyExist">Phone already Exist !</string>
-    <string name="error_password">Enter correct formate</string>
+    <string name="error_password1">Enter at least one upper-case</string>
+    <string name="error_password2">Enter at least one special characters</string>
+    <string name="error_password3">Enter at least 8 DIGIT</string>
+    <string name="error_password4">Enter at least 1 LOWER CASE</string>
+    <string name="error_password5">Enter at least 1 UPPER CASE</string>
+    <string name="error_password7">Enter at least Any number Upper And Lower Case and 8 Digit</string>
     <string name="error_rePassword">Password should be matched</string>
     <string name="all_name">Name</string>
     <string name="all_email">Email</string>

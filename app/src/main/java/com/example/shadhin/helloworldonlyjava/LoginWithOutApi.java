@@ -115,7 +115,7 @@ public class LoginWithOutApi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 email.setText("shadhinemail@gmail.com");
-                password.setText("123456");
+                password.setText("1Shadhin%");
             }
         });
     }
