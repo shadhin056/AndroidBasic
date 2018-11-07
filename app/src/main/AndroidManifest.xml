@@ -70,7 +70,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Note" />
         <activity android:name=".LogedIn" />
-        <activity android:name=".ApiLoginSUccess"></activity>
+        <activity android:name=".ApiLoginSUccess" />
+        <activity android:name=".RegSuccess"></activity>
     </application>
 
 </manifest>

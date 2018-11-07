@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                     // Toast.makeText(MainActivity.this, "Date Received Successfully", Toast.LENGTH_SHORT).show();
                     //birthdayTextView.setText("Selected Date: " + birthDay.getText());
                     // setContentView(R.layout.form_data_view);
-                    Intent intent = new Intent(MainActivity.this, DataViewActivities.class);
+                    Intent intent = new Intent(MainActivity.this, RegSuccess.class);
 
                     intent.putExtra("user_name1", user_name.getText().toString());
                     intent.putExtra("nick_name1", nickName.getText().toString());
